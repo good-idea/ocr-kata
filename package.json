@@ -11,9 +11,12 @@
     "dev": "jest --watch"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.1.0",
+    "@commitlint/config-conventional": "^8.1.0",
+    "@commitlint/prompt": "^8.1.0",
     "@types/jest": "^24.0.16",
-    "@types/node": "^12.6.8",
-    "@types/prettier": "^1.18.0",
+    "@types/node": "^12.6.9",
+    "@types/prettier": "^1.18.1",
     "husky": "^3.0.2",
     "jest": "^24.8.0",
     "prettier": "^1.18.2",
@@ -21,5 +24,11 @@
     "ts-jest": "^24.0.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
