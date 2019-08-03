@@ -1,0 +1,25 @@
+{
+  "name": "ocr-kata",
+  "version": "1.0.0",
+  "description": "OCR Kata",
+  "main": "dist/index.ts",
+  "repository": "https://www.github.com/good-idea/ocr-kata",
+  "author": "Joseph Thomas",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "dev": "jest --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.16",
+    "@types/node": "^12.6.8",
+    "@types/prettier": "^1.18.0",
+    "husky": "^3.0.2",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^1.11.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  }
+}
