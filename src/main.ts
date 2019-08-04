@@ -1,4 +1,5 @@
 import { Character, LineResult } from './types'
+import { ILLEGIBLE } from './characters'
 import { parseScan } from './parseScan'
 import { parseLine } from './parseLine'
 import { checksum } from './checksum'
@@ -11,20 +12,21 @@ import { checksum } from './checksum'
 const checkLine = (characters: Character[]): LineResult => {
   const accountString = characters.map((c) => c.digit).join('')
   const valid = checksum(accountString)
+  const illegible = characters.find((c) => c === ILLEGIBLE)
+  const flag = illegible ? 'ILL' : !valid ? 'ERR' : null
   const flags = [valid ? null : 'ERR'].filter(Boolean)
 
   return {
     characters,
     accountString,
-    flags,
+    flag,
     ambiguous: [],
   }
 }
 
 /* Takes a LineResult and returns a printable line */
-const printLine = ({ accountString, flags }: LineResult): string => {
-  const flagString = flags.join(' ')
-  return `${accountString} ${flagString}`.trim()
+const printLine = ({ accountString, flag }: LineResult): string => {
+  return [accountString, flag].filter(Boolean).join(' ')
 }
 
 /* Takes a scanned document,

@@ -1,5 +1,5 @@
 import { read } from '../main'
-import { scan1, invalid } from './sampleScans'
+import { scan1, invalid, illegible } from './sampleScans'
 
 describe('read', () => {
   it('should return an array of parsed results', async () => {
@@ -20,7 +20,14 @@ describe('read', () => {
   it('should append "ERR" to numbers that fail the checksum', () => {
     const scanResults = read(invalid)
     scanResults.forEach((result) => {
-      expect(result).toMatch(/[\d]{9} ERR/)
+      expect(result).toMatch(/[\d\?]{9} ERR/)
+    })
+  })
+
+  it('should append "ILL" to numbers that do not have a match', () => {
+    const scanResults = read(illegible)
+    scanResults.forEach((result) => {
+      expect(result).toMatch(/[\d\?]{9} ILL/)
     })
   })
 })

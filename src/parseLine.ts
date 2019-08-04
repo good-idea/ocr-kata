@@ -1,5 +1,5 @@
 import { ScanLine, Character, Maybe } from './types'
-import { characters, stringToDisplay } from './characters'
+import { characters, ILLEGIBLE, stringToDisplay } from './characters'
 import { sliceGroup } from './utils'
 import { ACCT_CHAR_LENGTH, SCAN_LINE_HEIGHT, CHAR_WIDTH, SCAN_LINE_LENGTH } from './constants'
 
@@ -9,7 +9,7 @@ import { ACCT_CHAR_LENGTH, SCAN_LINE_HEIGHT, CHAR_WIDTH, SCAN_LINE_LENGTH } from
 
 const parseCharacter = (charString: string): Character => {
   const match = characters.find((c) => c.serialized === charString)
-  if (!match) throw new Error(`No match for scanned character: ${stringToDisplay(charString)}`)
+  if (!match) return ILLEGIBLE
   return match
 }
 

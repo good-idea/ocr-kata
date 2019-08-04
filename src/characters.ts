@@ -1,4 +1,4 @@
-import { Character } from './types'
+import { ValidCharacter } from './types'
 import { sliceGroup } from './utils'
 import { CHAR_WIDTH } from './constants'
 
@@ -60,7 +60,7 @@ export const stringToDisplay = (charString: string): string =>
     .join('\n')
 
 /* Initialize each character */
-export const characters: Character[] = baseChars.map((char, index) => {
+export const characters: ValidCharacter[] = baseChars.map((char, index) => {
   /* Split each line into individual chars, then flatten into single array */
   const display = stringToDisplay(char)
 
@@ -71,3 +71,7 @@ export const characters: Character[] = baseChars.map((char, index) => {
     ambMatches: [],
   }
 })
+
+export const ILLEGIBLE = {
+  digit: '?',
+}

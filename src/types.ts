@@ -1,3 +1,5 @@
+import { ILLEGIBLE } from './characters'
+
 export type Maybe<T> = T | void
 
 /* A single row of characters in a scan, split into an array.
@@ -16,12 +18,14 @@ interface ScanChar {
   serialized: string
 }
 
-export interface Character extends ScanChar {
+export interface ValidCharacter extends ScanChar {
   /* The digit this OCR represents */
   digit: number
   /* Possible ambiguous matches */
-  ambMatches: ScanChar[]
+  ambMatches: string[]
 }
+
+export type Character = ValidCharacter | typeof ILLEGIBLE
 
 /**
  * LineResult
@@ -34,6 +38,6 @@ export interface Character extends ScanChar {
 export interface LineResult {
   characters: Character[]
   accountString: string
-  flags: string[]
+  flag: string
   ambiguous: string[]
 }
