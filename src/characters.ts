@@ -1,5 +1,5 @@
 import { ValidCharacter } from './types'
-import { sliceGroup } from './utils'
+import { sliceGroup, matchAll, replaceCharacter } from './utils'
 import { CHAR_WIDTH } from './constants'
 
 /* Exports an array of 'Character' objects generated from easier-to-read templates */
@@ -48,10 +48,19 @@ const baseChars = [
   ' _|',
 ]
 
-// TODO: return all possible ambiguous matches
-// const getAmbiguousMatches = (scanString: string) => {
-//
-// }
+/* Takes a char string (one of the above) and generates
+ * any possible ambiguous matches in the case of the scanner
+ * not picking up a pipe or an underscore */
+
+const pipeOrUnderscore = /[_|]/g
+
+export const getAmbiguousMatches = (charString: string): string[] => {
+  const matches = matchAll(charString, pipeOrUnderscore).map((match) => {
+    const { offset } = match
+    return replaceCharacter(charString, ' ', offset)
+  })
+  return matches
+}
 
 /* pretty-print characters by their serialized string */
 export const stringToDisplay = (charString: string): string =>
@@ -68,7 +77,7 @@ export const characters: ValidCharacter[] = baseChars.map((char, index) => {
     display,
     digit: index,
     serialized: char,
-    ambMatches: [],
+    ambMatches: getAmbiguousMatches(char),
   }
 })
 
