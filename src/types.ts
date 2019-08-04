@@ -22,3 +22,18 @@ export interface Character extends ScanChar {
   /* Possible ambiguous matches */
   ambMatches: ScanChar[]
 }
+
+/**
+ * LineResult
+ *
+ * An object containing the matched Characters,
+ * A printable string,
+ * and any flags ['ERR', 'ILL']
+ */
+
+export interface LineResult {
+  characters: Character[]
+  accountString: string
+  flags: string[]
+  ambiguous: string[]
+}

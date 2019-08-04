@@ -7,7 +7,7 @@ import { ACCT_CHAR_LENGTH } from './constants'
   (d1 + 2*d2 + 3*d3 +..+ 9*d9) mod 11 = 0
 */
 
-export const checksum = (num: number) => {
+export const checksum = (num: number | string) => {
   const numString = num.toString()
   if (numString.length !== ACCT_CHAR_LENGTH) throw new Error('Account numbers must be 9 digits long')
   const sum = numString

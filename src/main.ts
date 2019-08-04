@@ -1,16 +1,30 @@
-import { Character } from './types'
+import { Character, LineResult } from './types'
 import { parseScan } from './parseScan'
 import { parseLine } from './parseLine'
-// import { checkSum } from './checkSum'
-//
+import { checksum } from './checksum'
 
 /**
- * Takes an array of parsed characters and returns a
- * printable result
+ * Takes an array of parsed Characters and returns a
+ * LineResult
  */
 
-const printLine = (line: Character[]): string => {
-  return line.map((l) => l.digit).join('')
+const checkLine = (characters: Character[]): LineResult => {
+  const accountString = characters.map((c) => c.digit).join('')
+  const valid = checksum(accountString)
+  const flags = [valid ? null : 'ERR'].filter(Boolean)
+
+  return {
+    characters,
+    accountString,
+    flags,
+    ambiguous: [],
+  }
+}
+
+/* Takes a LineResult and returns a printable line */
+const printLine = ({ accountString, flags }: LineResult): string => {
+  const flagString = flags.join(' ')
+  return `${accountString} ${flagString}`.trim()
 }
 
 /* Takes a scanned document,
@@ -20,6 +34,7 @@ const printLine = (line: Character[]): string => {
 export const read = (scan: string) => {
   const results = parseScan(scan)
     .map(parseLine)
+    .map(checkLine)
     .map(printLine)
   return results
 }
