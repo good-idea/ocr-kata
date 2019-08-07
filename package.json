@@ -11,9 +11,6 @@
     "demo": "DEBUG=ocr ts-node src/demo.ts",
     "dev": "jest --watch"
   },
-  "engines": {
-    "node": "^10.16.1"
-  },
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
