@@ -1,9 +1,9 @@
 import { read } from '../main'
-import { scan1, invalid, illegible } from './sampleScans'
+import { useCase1, invalid, illegible } from './sampleScans'
 
 describe('read', () => {
   it('should return an array of parsed results', async () => {
-    const scanResults = read(scan1)
+    const scanResults = read(useCase1)
     expect(scanResults[0]).toContain('000000000')
     expect(scanResults[1]).toContain('111111111')
     expect(scanResults[2]).toContain('222222222')
